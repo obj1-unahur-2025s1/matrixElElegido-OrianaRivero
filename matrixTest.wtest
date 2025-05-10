@@ -1,9 +1,53 @@
+import matrix.*
 
+describe "test de las personas " {
 
-describe "group of tests " {
+  test "neo salta y pierde la mitad de su energia" {
+    neo.saltar()
+    assert.equals(50, neo.energia())
+  }
 
-  test "test 01" {
-    assert.equals(100, 50+50)
+  test "neo salta 2 veces y le queda 2,5 de vitalidad"{
+    neo.saltar()
+    neo.saltar()
+    assert.equals(2.5, neo.vitalidad())
+  }
+
+  test "morfeo salta y se cansa"{
+    morfeo.saltar()
+    assert.notThat(morfeo.descansado())
+  }
+
+  test "morfeo salta 2 veces y queda con 6 de vitalidad"{
+    morfeo.saltar()
+    morfeo.saltar()
+    assert.equals(6, morfeo.vitalidad())
+  }
+
+  test "trinity no es la elegida"{
+    assert.notThat(trinity.esElElegido())
+  }
+}
+
+describe "test de la nave"{
+
+  test "la nave tiene 3 pasajeros"{
+    assert.equals(3, nave.cuantosPasajerosHay())
+  }
+
+  test "luego de acelerar la nave, en ella ya no se encuentra el elegido"{
+    nave.acelerar()
+    assert.notThat(nave.estaElElegido())
+  }
+
+  test "luego de acelerar la nave, el pasajero de mayor vitalidad es morfeo"{
+    nave.acelerar()
+    assert.that(nave.elDeMayorVitalidad() == morfeo)
+  }
+
+  test "la nave choca y queda sin pasajeros"{
+    nave.chocar()
+    assert.that(nave.pasajeros() == #{})
   }
 
 }
